@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saeed Alzahrani // Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-fira { font-family: 'Fira Code', monospace; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+        }
+        .glow-on-hover { transition: box-shadow 0.3s ease-in-out; }
+        .glow-on-hover:hover { box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.4); }
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.8rem;
+            background-color: #3b82f6;
+            animation: blink 1s infinite;
+            margin-left: 8px;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .skill-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        /* Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+         /* Simple spinner for loading state */
+        .loader {
+            border: 4px solid #30363d;
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Header & Navigation -->
+    <nav class="bg-gray-900/50 backdrop-blur-md sticky top-0 z-10 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-fira text-white">SA<span class="text-blue-500">.</span>dev</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#bio" class="hover:text-blue-400 transition duration-300">Bio</a>
+                <a href="#projects" class="hover:text-blue-400 transition duration-300">Projects</a>
+                <a href="mailto:shz5393@gmail.com" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Contact Me</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#bio" class="block py-2 hover:text-blue-400">Bio</a>
+            <a href="#projects" class="block py-2 hover:text-blue-400">Projects</a>
+            <a href="mailto:shz5393@gmail.com" class="block mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-center">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="container mx-auto px-6 py-24 text-center">
+        <h1 id="typing-heading" class="text-4xl md:text-6xl font-bold font-fira text-white min-h-[4rem] md:min-h-[6rem]">
+        </h1>
+        <p class="mt-4 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">A passionate developer crafting robust and user-friendly solutions for the web, now enhanced with AI.</p>
+        <div class="mt-8 flex justify-center items-center space-x-6">
+             <a href="mailto:shz5393@gmail.com" class="text-gray-400 hover:text-blue-400 transition duration-300">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M.05 6.25A2.25 2.25 0 012.25 4h19.5A2.25 2.25 0 0124 6.25v11.5A2.25 2.25 0 0121.75 20H2.25A2.25 2.25 0 01.05 17.75V6.25zm3.24-1.022a.75.75 0 00-.816 1.04l6.25 8.25a2.25 2.25 0 003.54 0l6.25-8.25a.75.75 0 00-.816-1.04l-5.434 4.075L9 5.228l-5.71 4.075z" clip-rule="evenodd" /></svg>
+             </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16">
+        <!-- AI Bio Generator Section -->
+        <section id="bio">
+            <h2 class="text-3xl font-bold font-fira text-center text-white mb-8">&lt;Bio /&gt;</h2>
+            <div id="bio-output" class="mt-8 p-6 bg-gray-800/50 border border-gray-700 rounded-2xl min-h-[10rem] text-gray-400 whitespace-pre-wrap">
+                Saeed Alzahrani is a results-driven developer specializing in crafting practical web-based solutions. Leveraging strong expertise in HTML, CSS, JavaScript, PHP, SQL, and Firebase, he consistently builds robust applications that address real-world challenges. His portfolio includes systems for student management, online examinations, financial process automation, and email administration, showcasing his ability to deliver efficient, user-friendly solutions with tangible impact.
+            </div>
+        </section>        
+        <!-- Projects Section -->
+        <section id="projects" class="mt-24">
+            <h2 class="text-3xl font-bold font-fira text-center text-white mb-12">&lt;Projects /&gt;</h2>
+            <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project cards will be injected here by JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 mt-16 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Saeed Alzahrani. Built with passion and code.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Project Elaboration -->
+    <div id="project-modal" class="modal-backdrop hidden">
+        <div class="modal-content w-11/12 md:max-w-2xl mx-auto rounded-2xl shadow-lg p-8 relative">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-blue-400 mb-4"></h3>
+            <div id="modal-body" class="text-gray-300 whitespace-pre-wrap"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- Project Data ---
+        const projects = [
+            {
+                title: "Students Management System",
+                company: "Department of Computer Engineering KSU",
+                description: "A system to manage student records and generate statistical reports in Word and Excel formats.",
+                skills: ["HTML", "CSS", "JavaScript", "Firebase", "Google App Script"],
+                elaboration: `The "Students Management System" is a robust, full-stack application engineered to revolutionize academic administration by centralizing and securing critical student information, providing a comprehensive platform for efficient data management and insightful analytics. Leveraging **Firebase's scalable NoSQL database and secure authentication features**, the system ensures real-time data persistence, integrity, and authorized access for sensitive records, including student demographics, academic performance, attendance, and enrollment history. A key technical achievement lies in its sophisticated **reporting engine, powered by Google App Script**. This custom integration dynamically processes complex datasets to generate comprehensive statistical reports, seamlessly exporting them into **industry-standard Microsoft Word and Excel formats**. This capability empowers educational institutions with **actionable insights** for data-driven decision-making, facilitating strategic resource allocation, curriculum development, identification of at-risk students, and efficient compliance reporting. The modern, responsive user interface, built with **HTML, CSS, and JavaScript**, ensures an intuitive and accessible experience for administrators, demonstrating expertise in crafting highly integrated, secure, and functionally rich web applications that deliver significant operational efficiencies and strategic advantages.`
+            },
+            {
+                title: "Online Examination Project",
+                company: "Alsalam Aerospace Industries",
+                description: "An online examination system for registered members, with history and mark tracking.",
+                skills: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
+                elaboration: `The **Online Examination Project** stands as a robust and dynamic full-stack web application, meticulously engineered to provide a secure and intuitive platform for knowledge assessment and performance tracking for registered members. Beyond a simple test delivery system, this project showcases a sophisticated integration of front-end and back-end technologies to create a comprehensive learning and evaluation environment. Leveraging HTML and CSS, the user interface was crafted for optimal responsiveness and accessibility, ensuring a seamless experience across various devices, while JavaScript was employed to enhance interactivity, provide real-time feedback, and implement client-side validation for improved data integrity. The core business logic, user authentication, and secure data handling are managed by a powerful PHP backend, ensuring secure registration, session management, and the reliable processing of examination data. All critical information, including user profiles, exam questions, submission details, and most notably, a detailed historical record of attempts and comprehensive mark tracking, is efficiently stored and retrieved from a normalized SQL database. This meticulous data persistence not only allows members to monitor their individual progress over time but also empowers administrators with invaluable analytics to assess overall performance trends, identify knowledge gaps, and streamline certification or educational processes, thereby demonstrating a strong command of secure data management, interactive web development, and scalable application architecture with significant potential for enhancing educational or corporate training initiatives.`
+            },
+            {
+                title: "Membership Control Panel",
+                company: "Saudi Students Association",
+                description: "Integration of a membership panel into an existing Java software application.",
+                skills: ["Java"],
+                elaboration: `This project involved the meticulous design and seamless integration of a comprehensive Membership Control Panel into a pre-existing, mature Java software application. Far exceeding a simple module addition, this endeavor demanded a deep architectural understanding of the legacy system to ensure non-disruptive deployment and robust interoperability with existing data structures and business logic. Leveraging Java's enterprise capabilities, I engineered a highly secure and scalable solution, implementing sophisticated role-based access control (RBAC) to precisely manage user permissions, fortifying authentication and authorization mechanisms with industry-standard secure coding practices (including robust password hashing and session management), and providing an intuitive interface for user profile and administrative management. This pivotal enhancement not only significantly elevates the application's security posture by safeguarding sensitive data and functionalities, but also dramatically improves the user experience through personalized content delivery and self-service capabilities. Furthermore, it establishes a scalable and maintainable foundation crucial for future feature expansion, enabling new business models such as differentiated service tiers and subscription management, thereby driving operational efficiencies and unlocking substantial long-term value for the organization.`
+            },
+            {
+                title: "Financial Process Management",
+                company: "Saudia Aerospace Engineering",
+                description: "Calculates financial documents for submission to the Etimad Platform.",
+                skills: ["HTML", "CSS", "JavaScript", "Firebase"],
+                elaboration: `The "Financial Process Management" project is a robust web application meticulously engineered to streamline and automate the complex preparation and precise calculation of financial documentation, specifically tailored for seamless submission to the Etimad Platform – a critical government e-procurement and financial management system. Moving beyond simple computation, this solution incorporates sophisticated business logic to accurately generate various financial artifacts, ensuring meticulous adherence to regulatory standards and complex financial rules. Leveraging a modern front-end stack of HTML, CSS, and JavaScript, I engineered an intuitive and highly responsive user interface that simplifies data entry, provides real-time validation, and significantly reduces the potential for human error inherent in manual processes. On the backend, Firebase was strategically employed to provide a scalable, secure, and real-time data management solution, facilitating dynamic calculations, secure data storage, and efficient retrieval, all while minimizing infrastructure overhead. This project dramatically enhances operational efficiency, accelerates compliance processes, and empowers organizations to engage with government financial systems with greater confidence and accuracy, ultimately delivering significant time and cost savings by transforming a traditionally manual and error-prone process into a streamlined, strategic advantage.`
+            },
+            {
+                title: "Embedded Systems Projects",
+                company: "King Abdulaziz University",
+                description: "\"Password Based Lock System\" & \"GSM Based Load Control System\".",
+                skills: ["Microprocessors", "Automation", "C", "Assembly"],
+                elaboration: `My portfolio prominently features a suite of Embedded Systems Projects that underscore my expertise in designing and implementing high-performance, real-time control solutions for critical applications. The **"Password Based Lock System"** exemplifies my ability to engineer a robust, real-time access control solution, demonstrating meticulous attention to security and user interaction. This project involved developing custom firmware, predominantly in **C** with strategic **Assembly** optimizations, to interface seamlessly with microprocessors, manage input from a keypad, provide feedback via an LCD, and control an electromechanical locking mechanism. Key achievements included the implementation of secure authentication protocols, efficient state machine design for resilient operation, and optimizing code for resource-constrained environments, making it suitable for secure physical access in diverse settings from commercial security to smart home integration.\n\nComplementing this, the **"GSM Based Load Control System"** showcases my proficiency in distributed control and early machine-to-machine (M2M) communication. This innovative system enables remote management and **Automation** of electrical loads via SMS commands, acting as a precursor to modern IoT solutions. My work involved expertly programming **microprocessors** to integrate with a GSM module, parse incoming commands, validate security, and reliably switch connected loads through relay circuits. This project highlights my skills in developing reliable communication protocols over constrained networks, designing for fault tolerance, and achieving significant operational efficiency through remote accessibility. Collectively, these projects underscore my comprehensive capabilities in bare-metal development, optimizing **C** and **Assembly** for low-latency, deterministic execution, and creating impactful embedded solutions that drive tangible value and operational excellence in challenging environments.`
+            },
+            {
+                title: "Email Management System",
+                company: "Open Source",
+                description: "Control panel to manage user emails and permissions via Google Workspace Admin API.",
+                skills: ["HTML", "CSS", "JavaScript", "Firebase", "Google Workspace"],
+                elaboration: `The **Email Management System** is a sophisticated, full-stack application designed to revolutionize the administration of Google Workspace environments. This powerful control panel provides administrators with an intuitive and centralized interface to streamline critical tasks such as user provisioning and deprovisioning, group membership management, permission assignment, and alias creation. Leveraging the robust Google Workspace Admin API, the system establishes a secure and programmatic interface, significantly reducing manual overhead and minimizing the potential for human error inherent in console-based administration. Built with a modern web stack, the front-end utilizes **HTML, CSS, and JavaScript** to deliver a responsive and engaging user experience. The backend architecture critically integrates **Firebase**, not only for secure and scalable user authentication and hosting but also, through **Firebase Cloud Functions**, to securely manage interactions with the Google Workspace Admin API, ensuring that sensitive credentials are never exposed client-side. This strategic design choice dramatically enhances the system's security posture and scalability. By automating routine operations and providing a unified dashboard, this project demonstrates advanced proficiency in API integration, secure backend development, and user-centric front-end design, ultimately empowering organizations to manage their **Google Workspace** resources with unprecedented efficiency, security, and precision, driving significant operational cost savings and improved compliance.`
+            }
+        ];
+
+        // --- Render Projects ---
+        const projectList = document.getElementById('project-list');
+        projects.forEach((project, index) => {
+            const skillBadges = project.skills.map(skill => `<span class="skill-badge">${skill}</span>`).join('');
+            const projectCard = `
+                <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6 shadow-lg glow-on-hover flex flex-col">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-2">${project.title}</h3>
+                    <p class="text-sm text-gray-500 mb-3">${project.company}</p>
+                    <p class="text-gray-300 mb-4 flex-grow">${project.description}</p>
+                    <div class="flex flex-wrap">${skillBadges}</div>
+                    <div class="mt-auto pt-4 border-t border-gray-700/50">
+                       <button onclick="elaborateProject(${index})" class="w-full text-center bg-blue-600/50 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">Read more...</button>
+                    </div>
+                </div>
+            `;
+            projectList.innerHTML += projectCard;
+        });
+
+        // --- Mobile Menu Toggle ---
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // --- Typing Effect ---
+        const typingHeading = document.getElementById('typing-heading');
+        const textToType = "Saeed Alzahrani";
+        let charIndex = 0;
+        function type() {
+            if (charIndex < textToType.length) {
+                typingHeading.innerHTML = `${textToType.substring(0, charIndex + 1)}<span class="typing-cursor"></span>`;
+                charIndex++;
+                setTimeout(type, 150);
+            } else {
+                 typingHeading.innerHTML = `${textToType}<span class="typing-cursor"></span>`;
+            }
+        }
+
+        // --- Matrix Background Effect ---
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let letters = '01'.split('');
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(13, 17, 23, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#3b82f6';
+            ctx.font = `${fontSize}px Fira Code`;
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        let matrixInterval = setInterval(drawMatrix, 50);
+        window.addEventListener('resize', () => {
+             canvas.width = window.innerWidth;
+             canvas.height = window.innerHeight;
+             drops.length = Math.floor(window.innerWidth / fontSize);
+             for(let i=0; i < drops.length; i++) { drops[i] = 1; }
+        });
+
+
+        
+        // Modal elements
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const bioOutput = document.getElementById('bio-output');
+        const generateBioBtn = document.getElementById('generate-bio-btn');
+        
+        // Loading spinner HTML
+        const loaderHTML = '<div class="flex justify-center items-center"><div class="loader"></div></div>';
+        
+
+        // --- Project Elaboration Logic ---
+        window.elaborateProject = function(projectIndex) {
+            const project = projects[projectIndex];
+            modal.classList.remove('hidden');
+            modalTitle.innerText = project.title;
+            modalBody.innerText = project.elaboration;
+        }
+
+        closeModalBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+        // --- Initialize App ---
+        document.addEventListener('DOMContentLoaded', type);
+    </script>
+</body>
+</html>
+
